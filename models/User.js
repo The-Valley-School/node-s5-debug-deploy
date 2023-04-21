@@ -16,6 +16,23 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
+    address: {
+      type: {
+        street: {
+          type: String,
+          required: true,
+        },
+        number: {
+          type: Number,
+          required: true,
+        },
+        city: {
+          type: String,
+          required: true,
+        },
+      },
+      required: false,
+    },
   },
   {
     timestamps: true,

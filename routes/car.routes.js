@@ -17,11 +17,6 @@ router.get("/", async (req, res) => {
       .limit(limit)
       .skip((page - 1) * limit);
 
-    // LIMIT 10, PAGE 1 -> SKIP = 0
-    // LIMIT 10, PAGE 2 -> SKIP = 10
-    // LIMIT 10, PAGE 3 -> SKIP = 20
-    // ...
-
     // Num total de elementos
     const totalElements = await Car.countDocuments();
 
@@ -73,13 +68,7 @@ router.get("/brand/:brand", async (req, res) => {
 // CRUD: CREATE
 router.post("/", async (req, res) => {
   try {
-    const car = new Car({
-      brand: req.body.brand,
-      model: req.body.model,
-      plate: req.body.plate,
-      power: req.body.power,
-    });
-
+    const car = new Car(req.body);
     const createdCar = await car.save();
     return res.status(201).json(createdCar);
   } catch (error) {

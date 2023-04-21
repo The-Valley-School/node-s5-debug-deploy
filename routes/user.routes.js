@@ -18,11 +18,6 @@ router.get("/", async (req, res) => {
       .limit(limit)
       .skip((page - 1) * limit);
 
-    // LIMIT 10, PAGE 1 -> SKIP = 0
-    // LIMIT 10, PAGE 2 -> SKIP = 10
-    // LIMIT 10, PAGE 3 -> SKIP = 20
-    // ...
-
     // Num total de elementos
     const totalElements = await User.countDocuments();
 
@@ -74,12 +69,7 @@ router.get("/name/:name", async (req, res) => {
 // CRUD: CREATE
 router.post("/", async (req, res) => {
   try {
-    const user = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      phone: req.body.phone,
-    });
-
+    const user = new User(req.body);
     const createdUser = await user.save();
     return res.status(201).json(createdUser);
   } catch (error) {

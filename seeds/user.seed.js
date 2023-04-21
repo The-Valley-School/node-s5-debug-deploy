@@ -4,9 +4,27 @@ const { User } = require("../models/User.js");
 const { faker } = require("@faker-js/faker");
 
 const userList = [
-  { firstName: "Fran", lastName: "Linde", phone: "123123123" },
+  {
+    firstName: "Fran",
+    lastName: "Linde",
+    phone: "123123123",
+    address: {
+      street: "Calle falsa",
+      number: 123,
+      city: "Ávila",
+    },
+  },
   { firstName: "Edu", lastName: "Cuadrado" },
-  { firstName: "Gon", lastName: "Fernández", phone: "666777888" },
+  {
+    firstName: "Gon",
+    lastName: "Fernández",
+    phone: "666777888",
+    address: {
+      street: "Calle Torregalindo",
+      number: 1,
+      city: "Madrid",
+    },
+  },
 ];
 
 // Creamos usuarios adicionales
