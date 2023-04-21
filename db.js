@@ -2,9 +2,10 @@
 require("dotenv").config();
 const DB_CONNECTION = process.env.DB_URL;
 
+// Importamos librerías
 const mongoose = require("mongoose");
 
-// Configuración de la conexión
+// Configuración de la conexión a Mongo
 const config = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
