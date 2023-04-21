@@ -16,21 +16,32 @@ for (let i = 0; i < 50; i++) {
     lastName: faker.name.lastName(),
     phone: faker.phone.number("+34 91 ### ## ##"),
   };
+
+  console.log(newUser.phone);
+
   userList.push(newUser);
 }
 
-connect().then(() => {
-  console.log("Tenemos conexión");
+connect()
+  .then(() => {
+    console.log("Tenemos conexión");
 
-  // Borrar datos
-  User.collection.drop().then(() => {
-    console.log("Usuarios eliminados");
+    // Borrar datos
+    User.collection.drop().then(() => {
+      console.log("Usuarios eliminados");
 
-    // Añadimos usuarios
-    const documents = userList.map((user) => new User(user));
-    User.insertMany(documents)
-      .then(() => console.log("Datos guardados correctamente!"))
-      .catch((error) => console.error(error))
-      .finally(() => mongoose.disconnect());
+      // Añadimos usuarios
+      const documents = userList.map((user) => new User(user));
+      User.insertMany(documents)
+        .then((data) => {
+          console.log(data);
+          console.log("Datos guardados correctamente!");
+        })
+        .catch((error) => console.error(error))
+        .finally(() => mongoose.disconnect());
+    });
+  })
+  .catch((error) => {
+    console.error("ERROR AL CONECTAR CON LA BBDD");
+    console.error(error);
   });
-});

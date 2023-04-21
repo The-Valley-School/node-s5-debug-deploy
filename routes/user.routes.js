@@ -9,6 +9,7 @@ const router = express.Router();
 // CRUD: READ
 // EJEMPLO DE REQ: http://localhost:3000/user?page=1&limit=10
 router.get("/", async (req, res) => {
+  console.log("ME HAN PEDIDO USUARIOS!!");
   try {
     // Asi leemos query params
     const page = parseInt(req.query.page);
