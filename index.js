@@ -5,7 +5,7 @@ const { carRouter } = require("./routes/car.routes.js");
 const main = async () => {
   // Conexión a la BBDD
   const { connect } = require("./db.js");
-  await connect();
+  const database = await connect();
 
   // Configuración del server
   const PORT = 3000;
@@ -16,7 +16,7 @@ const main = async () => {
   // Rutas
   const router = express.Router();
   router.get("/", (req, res) => {
-    res.send("Esta es la home de nuestra API");
+    res.send(`Esta es la home de nuestra API. Estamos utilizando la BBDD de ${database.connection.name} `);
   });
   router.get("*", (req, res) => {
     res.status(404).send("Lo sentimos :( No hemos encontrado la página solicitada.");
