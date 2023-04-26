@@ -1,0 +1,53 @@
+# VIDEO 05 - Pricing de Vercel y solución de 500 por conexión
+
+En este vídeo hemos comentado el plan gratuito de vercel:
+
+<https://vercel.com/pricing>
+
+El cual nos provoca que el servidor se re-inicie y genere errores 500 por culpa de que no estamos gestionando bien la conexión.
+
+Para corregirlo hemos modificado nuestro index.js de manera que espere a que la conexión termine para ejecutar el resto del código:
+
+```jsx
+const express = require("express");
+const { userRouter } = require("./routes/user.routes.js");
+const { carRouter } = require("./routes/car.routes.js");
+
+const main = async () => {
+  // Conexión a la BBDD
+  const { connect } = require("./db.js");
+  await connect();
+
+  // Configuración del server
+  const PORT = 3000;
+  const server = express();
+  server.use(express.json());
+  server.use(express.urlencoded({ extended: false }));
+
+  // Rutas
+  const router = express.Router();
+  router.get("/", (req, res) => {
+    res.send("Esta es la home de nuestra API");
+  });
+  router.get("*", (req, res) => {
+    res.status(404).send("Lo sentimos :( No hemos encontrado la página solicitada.");
+  });
+
+  // Usamos las rutas
+  server.use("/user", userRouter);
+  server.use("/car", carRouter);
+  server.use("/", router);
+
+  server.listen(PORT, () => {
+    console.log(`Server levantado en el puerto ${PORT}`);
+  });
+};
+
+main();
+```
+
+Para ello hemos hecho la función main asíncrona y hemos esperado a connect:
+
+```jsx
+await connect();
+```
