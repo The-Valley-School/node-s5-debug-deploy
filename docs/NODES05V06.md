@@ -9,7 +9,7 @@ De esa manera podemos desarrollar y trastear sin miedo de romper la API de produ
 
 Para ello hemos creado las dos bases de datos en mongodb:
 
-![Untitled](Sesio%CC%81n%205%20-%20Debug%20y%20despliegues%2035dbfc9dfd364fd996b60ef3839ddb04/Untitled%201.png)
+![Untitled](/docs/assets/Untitled%201.png)
 
 Después hemos configurado en nuestro fichero .env que queremos usar DEVELOPMENT:
 
@@ -20,7 +20,7 @@ DB_NAME = "DEVELOPMENT";
 
 En Vercel hemos añadido la variable de entorno para indicar que queremos usar PRODUCTION:
 
-![Untitled](Sesio%CC%81n%205%20-%20Debug%20y%20despliegues%2035dbfc9dfd364fd996b60ef3839ddb04/Untitled%202.png)
+![Untitled](/docs/assets/Untitled%202.png)
 
 Y hemos leído esa variable desde nuestro fichero db.js:
 
